@@ -14,7 +14,7 @@ builder.Services.AddScoped<EmployeeService>();
 
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<EmployeeContext>(options => options.UseSqlServer(connection));
-
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -30,5 +30,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+
 
 app.Run();
