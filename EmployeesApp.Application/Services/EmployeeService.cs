@@ -11,9 +11,13 @@ public class EmployeeService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<Employee>> GetEmployees()
+    public async Task<IEnumerable<Employee>> GetEmployees(int departamentId = 0,
+                                                     string? fio = null,
+                                                     DateTime? date = null,
+                                                     DateTime? birthdate = null,
+                                                     decimal? salary = null)
     {
-       return await _repository.GetEmployees();
+        return await _repository.GetEmployees(departamentId, fio, date, birthdate, salary);
     }
 
 

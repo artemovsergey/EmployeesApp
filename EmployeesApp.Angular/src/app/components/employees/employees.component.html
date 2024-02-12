@@ -1,32 +1,36 @@
-<div class="container-fluid">
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Отдел <input /> </th>
-        <th scope="col">Фио <input /></th>
-        <th scope="col">Дата трудоустройства <input type="date" /></th>
-        <th scope="col">Дата рождения <input type="date" /></th>
-        <th scope="col">Заработная плата <input /></th>
-      </tr>
-    </thead>
+    <table class="table table-borderless">
+        <thead>
+            <tr>
+                <th scope="col"> <i class="btn bi bi-sort-up"></i> Отдел <input /></th>
+                <th scope="col"> <i class="btn bi bi-sort-up"></i> Фио  <input /></th>
+                <th scope="col"> <i class="btn bi bi-sort-up"></i> Заработная плата  <input /></th>
+                <th scope="col"> <i class="btn bi bi-sort-up"></i> Дата устройства  <input type="date" /></th>
+                <th scope="col"> <i class="btn bi bi-sort-up"></i> Дата рождения  <input type="date" /></th>
 
-    <tbody>
+                <th scope="row"></th>
+                <th scope="row"></th>
+            </tr>
+        </thead>
 
-      <tr *ngFor="let employee of employees">
-        <td>{{ employee.departament }}</td>
-        <td>{{ employee.fullName }}</td>
-        <td>{{ employee.dateEmployment | date:'shortDate' }}</td>
-        <td>{{ employee.birthDay | date:'shortDate' }}</td>
-        <td>{{ employee.salary | currency:"RUB":"symbol" }}</td>
-        <td><button class="btn btn-success">Создать</button></td>
-        <td><button class="btn btn-info">Редактировать</button></td>
-        <td><button class="btn btn-danger">Удалить</button></td>
-      </tr>
+        <tbody>
 
-    </tbody>
-  </table>
+            <tr *ngFor="let employee of employees">
+                <td>{{ employee.departament }}</td>
+                <td>{{ employee.fullName }}</td>
+                <td>{{ employee.salary | currency:"RUB":"symbol" }}</td>
+                <td>{{ employee.dateEmployment | date:'shortDate' }}</td>
+                <td>{{ employee.birthDay | date:'shortDate' }}</td>
 
-</div>
+                <td><button class="btn btn-info">Редактировать</button></td>
+                <td><button class="btn btn-danger">Удалить</button></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+
+
 
 

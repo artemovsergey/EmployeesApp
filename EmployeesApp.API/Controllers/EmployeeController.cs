@@ -16,9 +16,13 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Employee>> Employees()
+    public async Task<ActionResult<IEnumerable<Employee>>> Employees(int departamentId = 0,
+                                                     string? fio = null,
+                                                     DateTime? date = null,
+                                                     DateTime? birthdate = null,
+                                                     decimal? salary = null)
     {
-        return await _employeeService.GetEmployees();
+        return Ok(await _employeeService.GetEmployees(departamentId, fio, date, birthdate, salary) );
     }
 
 }

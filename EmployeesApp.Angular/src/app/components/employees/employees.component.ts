@@ -24,7 +24,7 @@ export class EmployeesComponent {
   }
 
   getUsers() {
-    this.http.get<Employee[]>('https://localhost:7236/api/Employees').subscribe({
+    this.http.get<Employee[]>('http://localhost:5231/api/Employees').subscribe({
       next: response => this.employees = response,
       error: error => console.log(error)
     })
