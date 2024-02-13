@@ -17,6 +17,19 @@ export class EmployeesComponent {
   title: string = "Angular";
   employees?: Employee[] | null;
 
+  currentSort: string = '';
+  sortDirection: boolean = false; // false для сортировки по возрастанию, true для сортировки по убыванию
+
+  sort(column: string): void {
+    if (this.currentSort === column) {
+      this.sortDirection = !this.sortDirection;
+    } else {
+      this.currentSort = column;
+      this.sortDirection = false;
+    }
+  }
+
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {

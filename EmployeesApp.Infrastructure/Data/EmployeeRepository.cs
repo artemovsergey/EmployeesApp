@@ -1,8 +1,4 @@
-﻿using EmployeesApp.Domen.Interfaces;
-using EmployeesApp.Domen.Models;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using System.Security.AccessControl;
+﻿
 
 namespace EmployeesApp.Infrastructure.Data;
 
@@ -15,36 +11,36 @@ public class EmployeeRepository : IEmployeeRepository
         _db = db;
     }
 
-    public Task CreateEmployee()
+    public async Task Create(Employee e)
     {
-        throw new NotImplementedException();
+        var employee = await _db.Employees.AddAsync(e);
+        await _db.SaveChangesAsync();
     }
 
-    public Task DeleteEmployee(Employee employee)
+    public async Task Delete(Employee e)
     {
-        throw new NotImplementedException();
+        var employee = _db.Employees.Remove(e);
+        await _db.SaveChangesAsync();
     }
 
-    public Task<Employee> GetEmployeesById(int id)
+    public async Task Edit(Employee e)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<Employee> EditEmployee()
-    {
-        throw new NotImplementedException();
+        _db.Entry(e).State = EntityState.Modified;
+        await _db.SaveChangesAsync();
     }
 
     public async Task<IEnumerable<Employee>> GetEmployees(int departamentId = 0,
                                                     string? fio = null,
                                                     DateTime? date = null,
                                                     DateTime? birthdate = null,
-                                                    decimal? salary = null)
+                                                    decimal? salary = null,
+                                                    string sortColumn = "FullName",
+                                                    string sortOrder = "ASC"
+                                                    )
     {
-
         IQueryable<Employee> query = _db.Employees;
 
-        if(departamentId != 0)
+        if (departamentId != 0)
         {
             query = query.Where(e => e.DepartamentId == departamentId);
         }
@@ -69,7 +65,7 @@ public class EmployeeRepository : IEmployeeRepository
             query = query.Where(e => e.Salary == salary);
         }
 
-        return await query.OrderBy(e => e.FullName)
+        return await query.OrderBy($"{sortColumn} {sortOrder}")  //OrderBy(e => e.FullName)
                           .Skip(0)
                           .Take(query.Count())
                           .ToListAsync();

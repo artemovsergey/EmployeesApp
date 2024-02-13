@@ -13,10 +13,12 @@ public interface IEmployeeRepository
                                              string? fio = null,
                                              DateTime? date = null,
                                              DateTime? birthdate = null,
-                                             decimal? salary = null
+                                             decimal? salary = null,
+                                             string sortColumn = "",
+                                             string sortOrder = "ASC"
                                              );
-    Task<Employee> GetEmployeesById(int id);
-    Task CreateEmployee();
-    Task<Employee> EditEmployee();
-    Task DeleteEmployee(Employee employee);
+
+    Task Create(Employee employee);
+    Task Edit(Employee employee);
+    Task Delete(Employee employee);
 }
